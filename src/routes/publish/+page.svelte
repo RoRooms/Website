@@ -1,12 +1,3 @@
-<script lang="ts">
-	import { page } from "$app/stores";
-  import {SignIn} from "@auth/sveltekit/components";
-</script>
-
-<p>{$page.data.session?.user?.name}</p>
-
-<SignIn provider="roblox" signInPage="auth" class="link" />
-
 <div class="flex flex-col space-y-4 max-w-sm">
   <h1 class="text-3xl font-bold">Publish world</h1>
   <form id="publish-world" method="POST" action="?/publish" class="flex flex-col flex-1 space-y-2">

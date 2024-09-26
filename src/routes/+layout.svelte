@@ -2,6 +2,6 @@
   import "../app.css";
 </script>
 
-<div id="page-content" class="p-12">
+<div id="page-content" class="w-screen h-screen">
   <slot />
 </div>
