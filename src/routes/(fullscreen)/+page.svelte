@@ -4,7 +4,7 @@
 
 <div class="w-full flex flex-col">
   <div id="intro" class="w-full flex flex-col items-center space-y-16 p-24 pt-40 pb-40 bg-gradient-to-l from-[#4219e5] to-[#7c5bff]">
-    <h1 class="text-5xl font-black text-white drop-shadow-md text-center">Upgrade your world.</h1>
+    <h1 class="text-5xl font-black text-white drop-shadow-md text-center">Upgrade your worlds.</h1>
     <span class="flex flex-row space-x-3">
       <a href="/install" class="btn btn-secondary">Install</a>
       <a href="#points" class="btn btn-secondary btn-outline">Learn more</a>
