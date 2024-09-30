@@ -14,6 +14,7 @@
     <div class="navbar-center lg:flex">
       <ul class="menu menu-horizontal px-1">
         <li><a href="/install" class="font-bold">Install</a></li>
+        <li><a href="/docs" class="font-bold">Docs</a></li>
         <li><a href="/publish" class="font-bold">Publish</a></li>
       </ul>
     </div>
