@@ -3,7 +3,7 @@
   import Logo from "$lib/components/logo.svelte";
 </script>
 
-<div class="h-full flex justify-center place-items-center bg-gradient-to-l from-[#4219e5] to-[#7c5bff]">
+<div class="w-full h-full flex justify-center place-items-center bg-gradient-to-l from-[#4219e5] to-[#7c5bff]">
   <span class="p-8 rounded-xl flex card bg-black space-y-4 justify-items-center drop-shadow-lg">
     <Logo classes="h-10" />
 

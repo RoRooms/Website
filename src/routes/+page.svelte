@@ -1,1 +1,0 @@
-<a class="link link-primary" href="/publish">Publish a world</a>

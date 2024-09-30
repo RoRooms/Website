@@ -16,6 +16,7 @@ export default {
         dark: {
           ...dark,
           primary: "#8566FF",
+          secondary: "white",
           primaryGradient: "linear-gradient(to bottom, #5033ff 0%,#7c5bff 100%)",
           background: "black"
         }
