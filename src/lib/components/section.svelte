@@ -8,7 +8,7 @@
 </script>
 
 <article class="md:flex md:space-y-0 rounded-xl border-2 overflow-hidden border-white/20 hover:bg-white/10 transition-all duration-300">
-  <span class="space-y-0 md:space-y-6 p-8 max-w-lg order-{order}">
+  <span class="flex-col space-y-0 md:space-y-6 p-8 max-w-lg order-{order}">
     <h1 class="text-4xl font-black text-white">{heading}</h1>
 
     <p>{description}</p>
