@@ -11,7 +11,7 @@
     <h1 class="text-5xl font-black text-white drop-shadow-md text-center">Elevate your worlds.</h1>
     <span class="flex flex-row space-x-3">
       <a href="/install" class="btn btn-secondary">Install</a>
-      <a href="/docs" class="btn btn-secondary btn-outline">Learn more</a>
+      <a href="/discord" class="btn btn-secondary btn-outline">Discuss</a>
     </span>
   </div>
   <div id="points" class="w-full p-4 pt-16 pb-16 space-y-6 flex flex-col items-center">
