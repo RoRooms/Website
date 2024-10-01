@@ -1,7 +1,8 @@
 <script lang="ts">
   export let heading;
   export let description;
-  export let img;
+  export let type: "img" | "video" = "img";
+  export let src;
   export let reversed = false;
 
   $: order = reversed ? 2 : 1;
@@ -13,5 +14,14 @@
 
     <p>{description}</p>
   </span>
-  <img class="md:shrink-0 w-full object-cover h-64 md:w-80 order-1" src="{img}" alt="">
+  <span class="md:shrink-0 w-full h-64 md:w-80 order-1 overflow-hidden relative flex items-center place-content-center">
+    {#if type == "img"}
+      <span class="w-full h-full bg-center bg-cover" style="background-image: url({src});" />
+    {:else if type == "video"}
+      <video autoplay loop muted class="w-full">
+        <source src="{src}" />
+        <track kind="captions" />
+      </video>
+    {/if}
+  </span>
 </article>
