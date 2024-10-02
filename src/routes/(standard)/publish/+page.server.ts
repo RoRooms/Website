@@ -1,5 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import * as cheerio from 'cheerio';
+import { registerPlace } from '../../../githubApp';
 
 async function fetchPlaceCreatorUrl(placeId: string) {
 	try {
@@ -102,6 +103,7 @@ export const actions = {
 
 		if (robloxProfile && tosAccepted == 'on' && typeof placeId == 'string') {
 			if (await userOwnsPlace(robloxProfile.sub, placeId)) {
+				registerPlace(placeId);
 			} else {
 				return false;
 			}
