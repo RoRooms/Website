@@ -102,8 +102,18 @@ export const actions = {
 		const placeId = formData.get('placeId');
 
 		if (robloxProfile && tosAccepted == 'on' && typeof placeId == 'string') {
-			if (await userOwnsPlace(robloxProfile.sub, placeId)) {
-				registerPlace(placeId);
+			const ownsPlace = await userOwnsPlace(robloxProfile.sub, placeId);
+
+			if (ownsPlace) {
+				try {
+					await registerPlace(placeId).then((result) => {
+						console.log(result);
+					});
+
+					return true;
+				} catch (error) {
+					console.error(error);
+				}
 			} else {
 				return false;
 			}
