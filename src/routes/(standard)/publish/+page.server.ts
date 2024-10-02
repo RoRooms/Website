@@ -69,6 +69,16 @@ async function getPlaceOwnerUserId(placeId: string) {
 	});
 }
 
+async function userOwnsPlace(userId: string, placeId: string) {
+	const ownerUserId = await getPlaceOwnerUserId(placeId);
+
+	if (userId == ownerUserId) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
 export const load = async (events) => {
 	const session = await events.locals.auth();
 
@@ -83,16 +93,18 @@ export const load = async (events) => {
 
 export const actions = {
 	publish: async (event) => {
-		event.request.formData().then((formData) => {
-			const data = formData;
-			const tosAccepted = data.get('tosAccepted');
-			const placeId = data.get('placeId');
+		const session = await event.locals.auth();
+		const formData = await event.request.formData();
 
-			if (tosAccepted == 'on' && typeof placeId == 'string') {
-				getPlaceOwnerUserId(placeId).then((userId) => {
-					console.log(userId);
-				});
+		const robloxProfile = session?.user.robloxProfile;
+		const tosAccepted = formData.get('tosAccepted');
+		const placeId = formData.get('placeId');
+
+		if (robloxProfile && tosAccepted == 'on' && typeof placeId == 'string') {
+			if (await userOwnsPlace(robloxProfile.sub, placeId)) {
+			} else {
+				return false;
 			}
-		});
+		}
 	}
 };
