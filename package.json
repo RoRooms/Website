@@ -34,6 +34,8 @@
   },
   "type": "module",
   "dependencies": {
-    "@auth/sveltekit": "^1.5.2"
+    "@auth/sveltekit": "^1.5.2",
+    "axios": "^1.7.7",
+    "cheerio": "^1.0.0"
   }
 }
