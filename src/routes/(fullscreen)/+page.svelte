@@ -10,8 +10,8 @@
   <div id="intro" class="w-full flex flex-col items-center space-y-16 p-24 py-40 bg-cover bg-[url($lib/media/Banner.png)] drop-shadow-[0_300px_100px_#8566FF20]">
     <h1 class="text-5xl font-black text-white drop-shadow-md text-center">Elevate your worlds.</h1>
     <span class="flex flex-row space-x-3">
-      <a href="/install" class="btn btn-secondary">Install</a>
-      <a href="/discord" class="btn btn-secondary btn-outline">Discuss</a>
+      <a href="/install" class="btn btn-secondary duration-300 hover:-translate-y-0.5">Install</a>
+      <a href="/discord" class="btn btn-secondary btn-outline duration-300 hover:-translate-y-0.5">Discuss</a>
     </span>
   </div>
   <div id="points" class="w-full px -4 flex flex-col items-center">
@@ -39,5 +39,5 @@
     height: 50px; /* Height of the fade blur */
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 25%, #100c1e 100%); /* Adjust colors as needed */
     pointer-events: none; /* Ensure the pseudo-element does not interfere with interactions */
-}
+  }
 </style>
