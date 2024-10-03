@@ -72,7 +72,11 @@ async function updateFile(path: string, content: string, message: string) {
 
 async function registerPlace(placeId: string) {
 	if (typeof placeId == 'string') {
-		return await updateFile(`${placeId}.json`, JSON.stringify({}), `Register place ${placeId}`);
+		return await updateFile(
+			`worlds/${placeId}.json`,
+			JSON.stringify({}),
+			`Register place ${placeId}`
+		);
 	}
 }
 
