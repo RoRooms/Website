@@ -6,7 +6,7 @@
   export let reversed = false;
 </script>
 
-<article class="md:flex md:space-y-0 rounded-xl border-2 overflow-hidden border-white/20 hover:bg-white/10 transition-all duration-300">
+<article class="md:flex md:space-y-0 rounded-xl border-2 overflow-hidden border-white/20 hover:bg-white/10 transition-all duration-300 hover:-translate-x-4">
   <span style="order: {reversed ? 2 : 1};" class="flex-col space-y-0 md:space-y-6 p-8 max-w-lg">
     <h1 class="text-4xl font-black text-white">{heading}</h1>
 
