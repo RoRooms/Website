@@ -1,3 +1,3 @@
 import { redirect } from '@sveltejs/kit';
 
-redirect(300, 'https://docs.rorooms.com/install');
+redirect(302, 'https://docs.rorooms.com/install');
