@@ -11,6 +11,7 @@ declare module '@auth/sveltekit' {
 
 export const { handle, signIn } = SvelteKitAuth({
 	providers: [Roblox],
+	trustHost: true,
 	callbacks: {
 		async jwt({ token, account, profile }) {
 			if (account && account.provider == 'roblox' && profile) {
