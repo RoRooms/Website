@@ -10,9 +10,8 @@ const app = new App({
 });
 
 const octokit = await app.getInstallationOctokit(55535552);
-const { data } = await app.octokit.request('/app');
 
-console.log(`GitHub app authenticated as: ${data?.slug}`);
+console.log(`GitHub app authenticated as.`);
 
 async function getFileContent(path: string) {
 	try {
