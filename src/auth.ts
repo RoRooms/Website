@@ -21,7 +21,7 @@ export const { handle, signIn } = SvelteKitAuth({
 			return token;
 		},
 		async session({ session, token }) {
-			if (token && session && session.user) {
+			if (token && session && session.user && token.robloxProfile) {
 				session.user.robloxProfile = token.robloxProfile;
 			}
 
