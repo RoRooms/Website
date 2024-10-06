@@ -14,14 +14,14 @@ export const { handle, signIn } = SvelteKitAuth({
 	trustHost: true,
 	callbacks: {
 		async jwt({ token, account, profile }) {
-			if (account && account.provider == 'roblox' && profile) {
+			if (account && account.provider == 'roblox' && profile && token) {
 				token.robloxProfile = profile;
 			}
 
 			return token;
 		},
 		async session({ session, token }) {
-			if (token) {
+			if (token && session && session.user) {
 				session.user.robloxProfile = token.robloxProfile;
 			}
 
