@@ -1,4 +1,3 @@
-import { redirect } from '@sveltejs/kit';
 import * as cheerio from 'cheerio';
 import { registerPlace } from '../../../githubApp';
 
@@ -79,18 +78,6 @@ async function userOwnsPlace(userId: string, placeId: string) {
 		return false;
 	}
 }
-
-// export const load = async (events) => {
-// 	const session = await events.locals.auth();
-
-// 	if (!session?.user) {
-// 		redirect(307, '/auth/signin');
-// 	}
-
-// 	return {
-// 		session
-// 	};
-// };
 
 export const actions = {
 	publish: async (event) => {
