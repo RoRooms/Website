@@ -1,4 +1,4 @@
-import { redirect } from '@sveltejs/kit';
+// import { redirect } from '@sveltejs/kit';
 // import * as cheerio from 'cheerio';
 // import { registerPlace } from '../../../githubApp';
 
@@ -80,17 +80,17 @@ import { redirect } from '@sveltejs/kit';
 // 	}
 // }
 
-export const load = async (events) => {
-	const session = await events.locals.auth();
+// export const load = async (events) => {
+// 	const session = await events.locals.auth();
 
-	if (!session?.user) {
-		redirect(307, '/auth/signin');
-	}
+// 	if (!session?.user) {
+// 		redirect(307, '/auth/signin');
+// 	}
 
-	return {
-		session
-	};
-};
+// 	return {
+// 		session
+// 	};
+// };
 
 // export const actions = {
 // 	publish: async (event) => {
