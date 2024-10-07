@@ -14,6 +14,9 @@ export const { handle, signIn } = SvelteKitAuth({
 	trustHost: true,
 	callbacks: {
 		async jwt({ token, account, profile }) {
+			console.log(token);
+			console.log(account);
+			console.log(profile);
 			try {
 				if (account?.provider === 'roblox' && profile) {
 					token.robloxProfile = profile;
@@ -25,6 +28,8 @@ export const { handle, signIn } = SvelteKitAuth({
 			return token;
 		},
 		async session({ session, token }) {
+			console.log(session);
+			console.log(token);
 			try {
 				if (token && session) {
 					session.user = session.user || {}; // Ensure session.user is initialized
