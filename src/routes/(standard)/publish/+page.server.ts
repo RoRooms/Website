@@ -94,7 +94,9 @@ export const actions = {
 			if (ownsPlace) {
 				try {
 					await registerPlace(placeId).then((result) => {
-						console.log(result);
+						if (result == true) {
+							console.log(`${robloxProfile.name} registered ${placeId}! 🎉`);
+						}
 					});
 
 					return true;

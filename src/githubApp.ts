@@ -24,9 +24,7 @@ async function getFileContent(path: string) {
 		if (content?.data) {
 			return content;
 		}
-	} catch (error) {
-		console.error(error);
-
+	} catch {
 		return null;
 	}
 }
@@ -35,33 +33,30 @@ async function updateFile(path: string, content: string, message: string) {
 	if (typeof path == 'string') {
 		const fileContent = await getFileContent(path);
 
-		if (fileContent) {
-			const existingContent = (fileContent?.data?.content || '').replace(/[\r\n]+/g, ' ');
-			const existingSha = fileContent?.data?.sha || '';
+		const existingContent = (fileContent?.data?.content || '').replace(/[\r\n]+/g, ' ');
 
-			const newContent = Buffer.from(content).toString('base64');
+		const newContent = Buffer.from(content).toString('base64');
 
-			if (atob(existingContent) !== atob(newContent)) {
-				const response = await octokit.rest.repos.createOrUpdateFileContents({
-					owner: OWNER,
-					repo: REPO,
-					path: path,
-					message: message,
-					content: newContent,
-					sha: existingSha,
-					committer: {
-						name: 'Publishing Bot',
-						email: 'noreply@rorooms.com'
-					},
-					author: {
-						name: 'Publishing Bot',
-						email: 'noreply@rorooms.com'
-					}
-				});
-
-				if (response?.status == 200) {
-					return true;
+		if (atob(existingContent) !== atob(newContent)) {
+			const response = await octokit.rest.repos.createOrUpdateFileContents({
+				owner: OWNER,
+				repo: REPO,
+				path: path,
+				message: message,
+				content: newContent,
+				sha: fileContent?.data?.sha,
+				committer: {
+					name: 'Publishing Bot',
+					email: 'noreply@rorooms.com'
+				},
+				author: {
+					name: 'Publishing Bot',
+					email: 'noreply@rorooms.com'
 				}
+			});
+
+			if (response?.status == 201) {
+				return true;
 			}
 		}
 	}
