@@ -1,10 +1,14 @@
 <script lang="ts">
   import { signIn } from "@auth/sveltekit/client";
-  import { onMount } from "svelte";
+  import type { LayoutServerLoad } from "../../$types";
 
-  onMount(() => {
-    signIn()
-  })
+  export const load: LayoutServerLoad = async (event) => {
+    event.locals.auth().then(session => {
+      if (session?.user == null) {
+        signIn()
+      }
+    });
+  };
 </script>
 
 <div class="flex flex-col space-y-4 max-w-md grow">
