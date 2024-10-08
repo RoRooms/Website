@@ -35,7 +35,6 @@ async function updateFile(path: string, content: string, message: string) {
 
 		const existingContent = (fileContent?.data?.content || '').replace(/[\r\n]+/g, ' ');
 
-		const newContent = new TextEncoder().encode(content);
 		const newContent = Buffer.from(content).toString('base64');
 
 		if (atob(existingContent) !== atob(newContent)) {
