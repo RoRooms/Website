@@ -12,6 +12,9 @@ declare module '@auth/sveltekit' {
 export const { handle, signIn } = SvelteKitAuth({
 	providers: [Roblox],
 	trustHost: true,
+	session: {
+		strategy: 'jwt'
+	},
 	callbacks: {
 		async jwt({ token, account, profile }) {
 			console.log(token);
