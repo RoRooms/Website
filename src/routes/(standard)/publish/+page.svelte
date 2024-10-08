@@ -1,7 +1,10 @@
 <script lang="ts">
   import { signIn } from "@auth/sveltekit/client";
+  import { onMount } from "svelte";
 
-  signIn()
+  onMount(() => {
+    signIn()
+  })
 </script>
 
 <div class="flex flex-col space-y-4 max-w-md grow">
