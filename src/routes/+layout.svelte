@@ -7,7 +7,7 @@
   <div class="navbar pl-8 pr-8 bg-zinc-900 overflow-hidden sticky top-0 z-10 drop-shadow-md">
     <div class="navbar-start">
       <a href="/">
-        <Logo classes="h-9 hover:drop-shadow-[0_4px_4px_rgba(255,255,255,0.5)] duration-300" />
+        <Logo classes="h-9 hover:drop-shadow-[0_4px_4px_rgba(255,255,255,0.3)] duration-300" />
       </a>
     </div>
 
