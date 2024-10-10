@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
   import "../app.css";
   import Logo from "$lib/components/logo.svelte";
+  import Headshot from "$lib/components/Headshot.svelte";
 </script>
 
 <div class="w-full h-screen flex flex-col">
@@ -19,9 +20,9 @@
       </ul>
     </div>
 
-    <div class="navbar-end">
-      Username
-    </div>
+    <span class="navbar-end">
+      <Headshot />
+    </span>
   </div>
 
   <slot />
