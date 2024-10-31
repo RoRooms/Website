@@ -22,16 +22,21 @@ const octokit = await app.getInstallationOctokit(55535552);
 console.log(`GitHub app authenticated as.`);
 
 function updateContent(oldContent: WorldFileContent, newContent: WorldFileContent) {
+	const updatedContent = structuredClone(oldContent);
+	const updatedKeys = [];
+
 	for (const key in newContent) {
 		const newValue = newContent[key];
-		const oldValue = oldContent[key];
+		const oldValue = updatedContent[key];
 
 		if (newValue != oldValue) {
-			oldContent[key] = newValue;
+			updatedContent[key] = newValue;
+
+			updatedKeys.push(key);
 		}
 	}
 
-	return oldContent;
+	return { updatedContent, updatedKeys };
 }
 
 async function getFileContent(path: string) {
@@ -56,10 +61,10 @@ async function updateFile(path: string, content: WorldFileContent, message: stri
 
 		const existingContent = (fileContent?.data?.content || '').replace(/[\r\n]+/g, ' ');
 		const existingContentObject = JSON.parse(atob(existingContent));
-		const newContent = updateContent(existingContentObject, content);
-		const newContentEncoded = Buffer.from(JSON.stringify(newContent)).toString('base64');
+		const { updatedContent, updatedKeys } = updateContent(existingContentObject, content);
+		const newContentEncoded = Buffer.from(JSON.stringify(updatedContent)).toString('base64');
 
-		if (atob(existingContent) !== atob(newContentEncoded)) {
+		if (atob(existingContent) !== atob(newContentEncoded) && updatedKeys.length > 1) {
 			const response = await octokit.rest.repos.createOrUpdateFileContents({
 				owner: OWNER,
 				repo: REPO,
@@ -94,10 +99,6 @@ export async function updateWorld(
 		universeId?: string;
 	}
 ) {
-	if (options.delist != true) {
-		options.delist = false;
-	}
-
 	const fileContent: WorldFileContent = {
 		updated: Date.now(),
 		delisted: options.delist
