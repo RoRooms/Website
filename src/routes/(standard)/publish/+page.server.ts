@@ -1,5 +1,6 @@
 import { getUniverseDetails, getUniverseId, userOwnsPlace } from '$lib/robloxApi';
 import { isPlaceRegistered, placePassesChecks, updateWorld } from '../../../githubApp';
+import { fail } from '@sveltejs/kit';
 
 export const actions = {
 	publish: async (event) => {
@@ -10,28 +11,42 @@ export const actions = {
 		const tosAccepted = formData.get('tosAccepted');
 		const placeId = formData.get('placeId');
 
-		if (robloxProfile && tosAccepted == 'on' && typeof placeId == 'string') {
-			const ownsPlace = await userOwnsPlace(robloxProfile.sub, placeId);
-			const universeId = await getUniverseId(placeId);
-			const universeDetails = await getUniverseDetails(universeId);
-			const alreadyRegistered = await isPlaceRegistered(placeId);
-			const passesChecks = placePassesChecks(placeId, universeDetails);
+		if (tosAccepted == 'on' && typeof placeId == 'string') {
+			if (robloxProfile) {
+				const ownsPlace = await userOwnsPlace(robloxProfile.sub, placeId);
+				const universeId = await getUniverseId(placeId);
+				const universeDetails = await getUniverseDetails(universeId);
+				const alreadyRegistered = await isPlaceRegistered(placeId);
+				const checkPass = placePassesChecks(placeId, universeDetails);
 
-			if (ownsPlace && (passesChecks || alreadyRegistered)) {
-				try {
-					await updateWorld(placeId, {
-						initialRegistration: !alreadyRegistered,
-						delist: !passesChecks,
-						universeId: universeId
-					}).then((result) => {
-						if (result == true) {
-							console.log(`${robloxProfile.name} updated ${placeId}! 🎉`);
+				if (ownsPlace) {
+					if (checkPass.passed || alreadyRegistered) {
+						try {
+							await updateWorld(placeId, {
+								initialRegistration: !alreadyRegistered,
+								delist: !checkPass.passed,
+								universeId: universeId
+							}).then((result) => {
+								if (result == true) {
+									console.log(`${robloxProfile.name} updated ${placeId}! 🎉`);
+								}
+
+								return { success: result == true };
+							});
+						} catch (error) {
+							console.error(error);
 						}
-					});
-				} catch (error) {
-					console.error(error);
+					} else {
+						return fail(404, { reason: 'World failed checks.', checks: checkPass.checks });
+					}
+				} else {
+					return fail(403, { reason: "You don't own this place." });
 				}
+			} else {
+				return fail(401, { reason: 'Unauthenticated with Roblox.' });
 			}
+		} else {
+			return fail(400, { reason: 'Missing form data.' });
 		}
 
 		return false;

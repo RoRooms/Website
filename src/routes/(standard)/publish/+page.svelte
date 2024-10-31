@@ -1,6 +1,11 @@
 <script lang="ts">
   import { signIn } from "@auth/sveltekit/client";
   import type { LayoutServerLoad } from "../../$types";
+	import type { ActionData, PageData } from "./$types";
+  import { enhance } from "$app/forms";
+
+  export let data: PageData;
+  export let form: ActionData;
 
   export const load: LayoutServerLoad = async (event) => {
     event.locals.auth().then(session => {
@@ -11,9 +16,13 @@
   };
 </script>
 
+<p>{data?.success}</p>
+
 <div class="flex flex-col space-y-4 max-w-md grow">
   <h1 class="text-3xl font-bold">Publish world</h1>
-  <form id="publish-world" method="POST" action="?/publish" class="flex flex-col flex-1 space-y-2">
+  <form id="publish-world" method="POST" action="?/publish" class="flex flex-col flex-1 space-y-2" use:enhance={({data: formData}) => {
+    alert(`${data?.success}`)
+}}>
     <div class="form-control">
       <div class="label">
         <span class="label-text">Place Id</span>

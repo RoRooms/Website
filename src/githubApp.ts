@@ -128,11 +128,23 @@ export function placePassesChecks(
 		price: number | null;
 	}
 ) {
-	return (
-		universeDetails != null &&
-		universeDetails?.rootPlaceId.toString() === placeId &&
-		typeof universeDetails?.price != 'number'
-	);
+	const checks = {
+		fetchFailed: universeDetails != null,
+		isRootPlace: universeDetails?.rootPlaceId.toString() === placeId,
+		isFree: typeof universeDetails?.price != 'number'
+	};
+	let checksPassed = true;
+
+	for (const [, passed] of Object.entries(checks)) {
+		if (passed == false) {
+			checksPassed = false;
+		}
+	}
+
+	return {
+		passed: checksPassed,
+		checks: checks
+	};
 }
 
 export async function isPlaceRegistered(placeId: string) {
