@@ -1,83 +1,5 @@
-import * as cheerio from 'cheerio';
-import { registerPlace } from '../../../githubApp';
-
-async function fetchPlaceCreatorUrl(placeId: string) {
-	try {
-		const response = await fetch(`https://www.roblox.com/games/${placeId}`);
-		const body = await response.text();
-		const $ = cheerio.load(body);
-
-		const gameCreatorText = $('.game-creator a').attr('href');
-
-		return gameCreatorText;
-	} catch (error) {
-		console.error('Error fetching the page:', error);
-
-		return null;
-	}
-}
-
-async function getCreatorFromUrl(url: string) {
-	const groupMatch = url.match(/roblox\.com\/groups\/([^/]+)/);
-	const userMatch = url.match(/roblox\.com\/users\/([^/]+)/);
-
-	if (groupMatch) {
-		return {
-			type: 'group',
-			id: groupMatch[1]
-		};
-	} else if (userMatch) {
-		return {
-			type: 'user',
-			id: userMatch[1]
-		};
-	}
-
-	return null;
-}
-
-async function getCreatorFromPlaceId(placeId: string) {
-	const url = await fetchPlaceCreatorUrl(placeId);
-
-	if (typeof url == 'string') {
-		return await getCreatorFromUrl(url);
-	}
-
-	return null;
-}
-
-async function getGroupOwnerUserId(groupId: string) {
-	const response = await fetch(`https://groups.roblox.com/v2/groups?groupIds=${groupId}`);
-
-	if (response.ok) {
-		const groupInfo = await response.json();
-		const ownerUserId = groupInfo.data[0].owner?.id;
-
-		if (ownerUserId) {
-			return ownerUserId;
-		}
-	}
-}
-
-async function getPlaceOwnerUserId(placeId: string) {
-	return getCreatorFromPlaceId(placeId).then((creator) => {
-		if (creator?.type == 'group') {
-			return getGroupOwnerUserId(creator.id);
-		} else {
-			return Number(creator?.id);
-		}
-	});
-}
-
-async function userOwnsPlace(userId: string, placeId: string) {
-	const ownerUserId = await getPlaceOwnerUserId(placeId);
-
-	if (userId == ownerUserId) {
-		return true;
-	} else {
-		return false;
-	}
-}
+import { getUniverseDetails, getUniverseId, userOwnsPlace } from '$lib/robloxApi';
+import { isPlaceRegistered, placePassesChecks, updateWorld } from '../../../githubApp';
 
 export const actions = {
 	publish: async (event) => {
@@ -90,22 +12,28 @@ export const actions = {
 
 		if (robloxProfile && tosAccepted == 'on' && typeof placeId == 'string') {
 			const ownsPlace = await userOwnsPlace(robloxProfile.sub, placeId);
+			const universeId = await getUniverseId(placeId);
+			const universeDetails = await getUniverseDetails(universeId);
+			const alreadyRegistered = await isPlaceRegistered(placeId);
+			const passesChecks = placePassesChecks(placeId, universeDetails);
 
-			if (ownsPlace) {
+			if (ownsPlace && (passesChecks || alreadyRegistered)) {
 				try {
-					await registerPlace(placeId).then((result) => {
+					await updateWorld(placeId, {
+						initialRegistration: !alreadyRegistered,
+						delist: !passesChecks,
+						universeId: universeId
+					}).then((result) => {
 						if (result == true) {
-							console.log(`${robloxProfile.name} registered ${placeId}! 🎉`);
+							console.log(`${robloxProfile.name} updated ${placeId}! 🎉`);
 						}
 					});
-
-					return true;
 				} catch (error) {
 					console.error(error);
 				}
-			} else {
-				return false;
 			}
 		}
+
+		return false;
 	}
 };

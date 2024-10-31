@@ -1,5 +1,13 @@
 import { env } from '$env/dynamic/private';
+import { getUniverseId } from '$lib/robloxApi';
 import { App } from 'octokit';
+
+type WorldFileContent = {
+	created?: number;
+	updated: number;
+	delisted: boolean;
+	universeId: string;
+};
 
 const OWNER = 'RoRooms';
 const REPO = 'Worlds';
@@ -12,6 +20,19 @@ const app = new App({
 const octokit = await app.getInstallationOctokit(55535552);
 
 console.log(`GitHub app authenticated as.`);
+
+function updateContent(oldContent: WorldFileContent, newContent: WorldFileContent) {
+	for (const key in newContent) {
+		const newValue = newContent[key];
+		const oldValue = oldContent[key];
+
+		if (newValue != oldValue) {
+			oldContent[key] = newValue;
+		}
+	}
+
+	return oldContent;
+}
 
 async function getFileContent(path: string) {
 	try {
@@ -29,21 +50,22 @@ async function getFileContent(path: string) {
 	}
 }
 
-async function updateFile(path: string, content: string, message: string) {
+async function updateFile(path: string, content: WorldFileContent, message: string) {
 	if (typeof path == 'string') {
 		const fileContent = await getFileContent(path);
 
 		const existingContent = (fileContent?.data?.content || '').replace(/[\r\n]+/g, ' ');
+		const existingContentObject = JSON.parse(atob(existingContent));
+		const newContent = updateContent(existingContentObject, content);
+		const newContentEncoded = Buffer.from(JSON.stringify(newContent)).toString('base64');
 
-		const newContent = Buffer.from(content).toString('base64');
-
-		if (atob(existingContent) !== atob(newContent)) {
+		if (atob(existingContent) !== atob(newContentEncoded)) {
 			const response = await octokit.rest.repos.createOrUpdateFileContents({
 				owner: OWNER,
 				repo: REPO,
 				path: path,
 				message: message,
-				content: newContent,
+				content: newContentEncoded,
 				sha: fileContent?.data?.sha,
 				committer: {
 					name: 'Publishing Bot',
@@ -64,14 +86,56 @@ async function updateFile(path: string, content: string, message: string) {
 	return false;
 }
 
-async function registerPlace(placeId: string) {
+export async function updateWorld(
+	placeId: string,
+	options: {
+		initialRegistration?: boolean;
+		delist: boolean;
+		universeId?: string;
+	}
+) {
+	if (options.delist != true) {
+		options.delist = false;
+	}
+
+	const fileContent: WorldFileContent = {
+		updated: Date.now(),
+		delisted: options.delist
+	};
+
+	if (options.initialRegistration == true) {
+		fileContent.created = fileContent.updated;
+	}
+
+	if (typeof options.universeId == 'string') {
+		fileContent.universeId = options.universeId;
+	}
+
 	if (typeof placeId == 'string') {
 		return await updateFile(
 			`worlds/${placeId}.json`,
-			JSON.stringify({}),
-			`Register place ${placeId}`
+			fileContent,
+			`${(options.initialRegistration && 'Register') || (options.delist && 'Delist') || 'Update'} world ${placeId}`
 		);
 	}
 }
 
-export { registerPlace };
+export function placePassesChecks(
+	placeId: string,
+	universeDetails: {
+		rootPlaceId: string;
+		price: number | null;
+	}
+) {
+	return (
+		universeDetails != null &&
+		universeDetails?.rootPlaceId.toString() === placeId &&
+		typeof universeDetails?.price != 'number'
+	);
+}
+
+export async function isPlaceRegistered(placeId: string) {
+	const fileContent = await getFileContent(`worlds/${placeId}.json`);
+
+	return fileContent != null;
+}
