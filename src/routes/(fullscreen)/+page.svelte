@@ -17,9 +17,9 @@
   </div>
   <div id="points" class="w-full flex flex-col items-center">
     <span class="space-y-6 flex-col bg-black px-4 lg:p-20 py-20">
-      <Section heading="Roleplay toolkit 🙋" description="With profiles, items, emotes and more, your world has everything it needs to engage players." type="video" src={InterfaceDemo} />
-      <Section reversed heading="Worlds network 🌐" description="By participating in the universal worlds network, you can reach more players than possible alone." src={NetworkPattern} />
-      <Section heading="Players-first 🙌" description="A seamless social experience, hopping between worlds with friends, and enjoying more time in-game." src={PlayersFirst} />
+      <Section heading="Social toolkit 🙋" description="With profiles, items, emotes and more, your world has everything it needs to engage players." type="video" src={InterfaceDemo} />
+      <Section reversed heading="Open network 🌐" description="A universal network, interconnecting all worlds, and allowing for more reach than possible alone." src={NetworkPattern} />
+      <Section heading="Happy players 🙌" description="A seamless social experience, hopping between worlds with friends, and enjoying more time in-game." src={PlayersFirst} />
       <Section reversed heading="Free and open 🕊️" description="It's all customizable and open source, so you can change whatever you like. They're your worlds, after all." src={GitHub} />
     </span>
   </div>
@@ -28,7 +28,7 @@
   </div>
   <footer id="footer" class="w-full flex flex-row flex-space justify-between flex-wrap py-16 px-8 lg:px-24 bg-black space-y-4">
     <span>
-      <Logo classes="h-10 opacity-80" />
+      <Logo classes="h-10" />
     </span>
     <span class="flex flex-row space-x-4">
       <a href="/terms" class="link">Terms of Service</a>
