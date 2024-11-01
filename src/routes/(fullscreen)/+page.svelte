@@ -24,7 +24,7 @@
     </span>
   </div>
   <div id="get-started" class="w-full flex flex-col items-center bg-[url($lib/media/Banner.png)] bg-center py-28 hover:brightness-105 duration-300">
-    <button class="btn btn-lg btn-secondary">Get started</button>
+    <a href="/install" class="btn btn-lg btn-secondary">Get started</a>
   </div>
   <footer id="footer" class="w-full flex flex-row flex-space justify-between flex-wrap py-16 px-8 lg:px-24 bg-black space-y-4">
     <span>
