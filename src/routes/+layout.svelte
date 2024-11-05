@@ -3,7 +3,7 @@
   import Navbar from "$lib/components/Navbar.svelte";
 </script>
 
-<div class="w-full h-full flex flex-col mt-16 overflow-hidden">
+<div class="w-full h-full flex flex-col mt-11 overflow-hidden">
   <Navbar />
 
   <slot />
