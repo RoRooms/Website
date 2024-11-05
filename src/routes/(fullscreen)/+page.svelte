@@ -32,7 +32,7 @@
     </span>
     <span class="flex flex-row space-x-4">
       <a href="/terms" class="link">Terms of Service</a>
-      <a href="/terms" class="link">Privacy Policy</a>
+      <a href="/privacy" class="link">Privacy Policy</a>
     </span>
   </footer>
 </div>
