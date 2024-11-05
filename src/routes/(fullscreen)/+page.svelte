@@ -23,8 +23,11 @@
       <Section reversed heading="Free and open 🕊️" description="It's all customizable and open source, so you can change whatever you like. They're your worlds, after all." src={GitHub} />
     </span>
   </div>
-  <div id="get-started" class="w-full flex flex-col items-center bg-[url($lib/media/Banner.png)] bg-center py-28 hover:brightness-105 duration-300">
-    <a href="/install" class="btn btn-lg btn-secondary">Get started</a>
+  <div id="get-started" class="w-full flex flex-col space-y-4 items-center bg-[url($lib/media/Banner.png)] bg-center py-28 hover:brightness-105 duration-300">
+    <span class="flex flex-row space-x-3">
+      <a href="/install" class="btn btn-lg btn-secondary duration-300 hover:-translate-y-0.5">Get started</a>
+    </span>
+    <a href="/github" class="link text-white">Star on GitHub 🤍</a>
   </div>
   <footer id="footer" class="w-full flex flex-row flex-space justify-between flex-wrap py-16 px-8 lg:px-24 bg-black space-y-4">
     <span>
