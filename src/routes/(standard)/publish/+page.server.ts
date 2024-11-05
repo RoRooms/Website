@@ -22,7 +22,7 @@ export const actions = {
 				if (ownsPlace) {
 					if (checkPass.passed || alreadyRegistered) {
 						try {
-							await updateWorld(placeId, {
+							const success = await updateWorld(placeId, {
 								initialRegistration: !alreadyRegistered,
 								delist: !checkPass.passed,
 								universeId: universeId
@@ -33,6 +33,15 @@ export const actions = {
 
 								return { success: result == true };
 							});
+
+							if (success.success) {
+								return success;
+							} else {
+								return fail(400, {
+									reason:
+										'Did not update/publish world. Either there were no changes to publish, or there was an error during publishing.'
+								});
+							}
 						} catch (error) {
 							console.error(error);
 						}
@@ -49,6 +58,6 @@ export const actions = {
 			return fail(400, { reason: 'Missing form data.' });
 		}
 
-		return false;
+		return fail(500, { reason: 'Unknown rejection.' });
 	}
 };
