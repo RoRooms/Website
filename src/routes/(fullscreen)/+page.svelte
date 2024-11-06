@@ -16,11 +16,17 @@
     </span>
   </div>
   <div id="points" class="w-full flex flex-col items-center">
-    <span class="space-y-6 flex-col bg-black px-4 lg:p-20 py-20">
-      <Section heading="Social toolkit 🙋" description="With profiles, items, emotes and more, your world has everything it needs to engage players." type="video" src={InterfaceDemo} />
-      <Section reversed heading="Open network 🌐" description="A universal network, interconnecting all worlds, and allowing for more reach than possible alone." src={NetworkPattern} />
-      <Section heading="Happy players 🙌" description="A seamless social experience, hopping between worlds with friends, and enjoying more time in-game." src={PlayersFirst} />
-      <Section reversed heading="Free and open 🕊️" description="It's all customizable and open source, so you can change whatever you like. They're your worlds, after all." src={GitHub} />
+    <span class="flex flex-col items-center space-y-12 bg-black px-4 lg:p-20 py-20">
+      <span class="flex max-w-xl text-center prose p-8 py-6 bg-white/5 rounded-3xl ring-1 ring-white/15">
+        <h2 class="font-semibold">An all-in-one framework for social experiences, providing both <b>social features</b> and a <b>universal network of worlds.</b></h2>
+      </span>
+      <div class="divider"></div>
+      <span class="space-y-6 flex-col">
+        <Section heading="Social toolkit 🙋" description="With profiles, items, emotes and more, your world has everything it needs to engage players." type="video" src={InterfaceDemo} />
+        <Section reversed heading="Open network 🌐" description="A universal network, interconnecting all worlds, and allowing for more reach than possible alone." src={NetworkPattern} />
+        <Section heading="Happy players 🙌" description="A seamless social experience, hopping between worlds with friends, and enjoying more time in-game." src={PlayersFirst} />
+        <Section reversed heading="Free and open 🕊️" description="It's all customizable and open source, so you can change whatever you like. They're your worlds, after all." src={GitHub} />
+      </span>
     </span>
   </div>
   <div id="get-started" class="w-full flex flex-col space-y-4 items-center bg-[url($lib/media/Banner.png)] bg-center py-28 hover:brightness-105 duration-300">
