@@ -60,7 +60,8 @@ async function updateFile(path: string, content: WorldFileContent, message: stri
 		const fileContent = await getFileContent(path);
 
 		const existingContent = (fileContent?.data?.content || '').replace(/[\r\n]+/g, ' ');
-		const existingContentObject = JSON.parse(atob(existingContent));
+		const decodedExistingContent = atob(existingContent || '');
+		const existingContentObject = decodedExistingContent ? JSON.parse(decodedExistingContent) : {};
 		const { updatedContent, updatedKeys } = updateContent(existingContentObject, content);
 		const newContentEncoded = Buffer.from(JSON.stringify(updatedContent)).toString('base64');
 
