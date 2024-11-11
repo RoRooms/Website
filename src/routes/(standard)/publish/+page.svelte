@@ -32,8 +32,15 @@
     </div>
     <button class="btn btn-primary">Publish!</button>
   </form>
+  <div class="divider"></div>
+  <div class="prose">
+    <h2>Keep in mind</h2>
+    <p>Worlds <b>must:</b></p>
+    <ul>
+      <li>Utilize the RoRooms framework, with world discovery enabled. 🌐</li>
+      <li>Not directly <i>or</i> indirectly promote Roblox ToS violation. ⚠️</li>
+    </ul>
+    <p>Delisting is subject to RoRooms' discretion. You are always welcome to fork the network.</p>
+  </div>
 </div>
 {/if}
-
-
-
