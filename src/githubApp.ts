@@ -1,5 +1,4 @@
 import { env } from '$env/dynamic/private';
-import { getUniverseId } from '$lib/robloxApi';
 import { App } from 'octokit';
 
 type WorldFileContent = {
@@ -7,6 +6,7 @@ type WorldFileContent = {
 	updated: number;
 	delisted: boolean;
 	universeId: string;
+	unpublished: boolean;
 };
 
 const OWNER = 'RoRooms';
@@ -98,6 +98,7 @@ export async function updateWorld(
 		initialRegistration?: boolean;
 		delist: boolean;
 		universeId?: string;
+		unpublish?: boolean;
 	}
 ) {
 	const fileContent: WorldFileContent = {
@@ -109,6 +110,10 @@ export async function updateWorld(
 		fileContent.created = fileContent.updated;
 	}
 
+	if (options.unpublish == true) {
+		fileContent.unpublished = true;
+	}
+
 	if (typeof options.universeId == 'string') {
 		fileContent.universeId = options.universeId;
 	}
@@ -117,7 +122,7 @@ export async function updateWorld(
 		return await updateFile(
 			`worlds/${placeId}.json`,
 			fileContent,
-			`${(options.initialRegistration && 'Register') || (options.delist && 'Delist') || 'Update'} world ${placeId}`
+			`${(options.initialRegistration && 'Register') || (options.unpublish && 'Unpublish') || (options.delist && 'Delist') || 'Update'} world ${placeId}`
 		);
 	}
 }

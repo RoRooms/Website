@@ -16,8 +16,8 @@
   <SignIn />
 {:else}
 <div class="flex flex-col space-y-4 max-w-md grow prose">
-  <h1>Publish world</h1>
-  <form id="publish-world" method="POST" action="?/publish" class="flex flex-col flex-1 space-y-2" use:enhance>
+  <h1>Unpublish world</h1>
+  <form method="POST" class="flex flex-col flex-1 space-y-2" use:enhance>
     <div class="form-control">
       <div class="label">
         <span class="label-text">Place Id</span>
@@ -30,19 +30,13 @@
         <input name="tosAccepted" type="checkbox" class="checkbox checkbox-primary" id="tosAccepted" required>
       </label>
     </div>
-    <button class="btn btn-primary">Publish!</button>
+    <button class="btn btn-primary">Unpublish</button>
   </form>
   <div class="divider"></div>
-  <div>
-    <h2>Keep in mind</h2>
-    <p>Worlds <b>must:</b></p>
-    <ul>
-      <li>Utilize the RoRooms framework, with world discovery enabled. 🌐</li>
-      <li>Not directly <i>or</i> indirectly promote Roblox ToS violation. ⚠️</li>
-    </ul>
-    <p>Delisting is subject to RoRooms' discretion. You are always welcome to fork the network.</p>
-  </div>
-  <div class="divider"></div>
-  <a href="/unpublish">I'd like to unpublish my world</a>
+  <ul>
+    <li>If you have any questions or concerns, you're welcome to <a href="/discord">contact support</a>. 💬</li>
+    <li>Unpublishing will take a while to update across all servers on the network. ⏳</li>
+    <li>By unpublishing, other worlds will no longer recognize or list your world. 🏝️</li>
+  </ul>
 </div>
 {/if}
