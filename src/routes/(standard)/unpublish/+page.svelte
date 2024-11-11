@@ -1,15 +1,18 @@
 <script lang="ts">
-  import { enhance } from "$app/forms";
   import { page } from "$app/stores";
   import SignIn from "$lib/components/SignIn.svelte";
+  import { browser } from "$app/environment";
 
   export let form;
 
-  page.subscribe((pageData) => {
-    if (pageData?.form?.reason) {
-      alert(`${pageData?.form?.reason}`)
+  if (browser) {
+    if (form?.reason) {
+      alert(`${form?.reason}`)
+    } else if (form?.success == true) {
+      alert('Unpublished successfully')
     }
-  })
+  }
+  
 </script>
 
 {#if $page.data.session?.user == null}
@@ -17,7 +20,7 @@
 {:else}
 <div class="flex flex-col space-y-4 max-w-md grow prose">
   <h1>Unpublish world</h1>
-  <form method="POST" class="flex flex-col flex-1 space-y-2" use:enhance>
+  <form method="POST" class="flex flex-col flex-1 space-y-2">
     <div class="form-control">
       <div class="label">
         <span class="label-text">Place Id</span>

@@ -83,7 +83,8 @@ async function updateFile(path: string, content: WorldFileContent, message: stri
 				}
 			});
 
-			if (response?.status == 201) {
+			const acceptableStatusCodes = [200, 201];
+			if (acceptableStatusCodes.includes(response.status)) {
 				return true;
 			}
 		}
@@ -103,15 +104,12 @@ export async function updateWorld(
 ) {
 	const fileContent: WorldFileContent = {
 		updated: Date.now(),
-		delisted: options.delist
+		delisted: options.delist,
+		unpublished: options.unpublish || false
 	};
 
 	if (options.initialRegistration == true) {
 		fileContent.created = fileContent.updated;
-	}
-
-	if (options.unpublish == true) {
-		fileContent.unpublished = true;
 	}
 
 	if (typeof options.universeId == 'string') {

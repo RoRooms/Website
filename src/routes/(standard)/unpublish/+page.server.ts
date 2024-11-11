@@ -14,14 +14,16 @@ export const actions = {
 		if (tosAccepted == 'on' && typeof placeId == 'string') {
 			if (robloxProfile) {
 				const ownsPlace = await userOwnsPlace(robloxProfile.sub, placeId);
+				const isAdmin = robloxProfile.sub == '144146784';
+				const isAdminForced = !ownsPlace && isAdmin;
 				const alreadyRegistered = await isPlaceRegistered(placeId);
 
-				if (ownsPlace || robloxProfile.sub == '144146784') {
+				if (ownsPlace || isAdminForced) {
 					if (alreadyRegistered) {
 						try {
-							const success = await updateWorld(placeId, {
-								delist: false,
-								unpublish: true
+							const result = await updateWorld(placeId, {
+								delist: isAdminForced,
+								unpublish: !isAdminForced && true
 							}).then((result) => {
 								if (result == true) {
 									console.log(`${robloxProfile.name} depublished ${placeId}! 🙁`);
@@ -30,11 +32,12 @@ export const actions = {
 								return { success: result == true };
 							});
 
-							if (success.success) {
-								return success;
+							if (result.success) {
+								return result;
 							} else {
 								return fail(400, {
-									reason: 'Unknown error during unpublishing.'
+									reason:
+										'World is either already unpublished, or there was an error during unpublishing.'
 								});
 							}
 						} catch (error) {
