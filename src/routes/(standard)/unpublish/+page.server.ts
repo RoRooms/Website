@@ -22,8 +22,8 @@ export const actions = {
 					if (alreadyRegistered) {
 						try {
 							const result = await updateWorld(placeId, {
-								delist: isAdminForced,
-								unpublish: !isAdminForced && true
+								unpublish: !isAdminForced && true,
+								forceDelist: (isAdminForced && true) || undefined
 							}).then((result) => {
 								if (result == true) {
 									console.log(`${robloxProfile.name} depublished ${placeId}! 🙁`);

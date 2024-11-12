@@ -4,9 +4,9 @@ import { App } from 'octokit';
 type WorldFileContent = {
 	created?: number;
 	updated: number;
-	delisted: boolean;
+	delisted?: boolean;
 	universeId: string;
-	unpublished: boolean;
+	forceDelisted?: boolean;
 };
 
 const OWNER = 'RoRooms';
@@ -97,15 +97,16 @@ export async function updateWorld(
 	placeId: string,
 	options: {
 		initialRegistration?: boolean;
-		delist: boolean;
+		delist?: boolean;
 		universeId?: string;
 		unpublish?: boolean;
+		forceDelist?: boolean;
 	}
 ) {
 	const fileContent: WorldFileContent = {
 		updated: Date.now(),
-		delisted: options.delist,
-		unpublished: options.unpublish || false
+		delisted: options.unpublish || options.delist,
+		forceDelisted: options.forceDelist
 	};
 
 	if (options.initialRegistration == true) {
