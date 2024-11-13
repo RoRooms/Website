@@ -8,7 +8,7 @@
 </script>
 
 <div class="w-full flex flex-col">
-  <div id="intro" class="w-full flex flex-col items-center space-y-16 p-24 py-40 bg-cover bg-[url($lib/media/Banner.png)] drop-shadow-[0_300px_100px_#8566FF20]">
+  <div id="intro" class="w-full flex flex-col items-center space-y-16 p-24 py-40 bg-cover bg-[url($lib/media/BannerBackground.png)] drop-shadow-[0_300px_100px_#8566FF20]">
     <h1 class="text-5xl font-black text-white drop-shadow-md text-center">Elevate your worlds.</h1>
     <span class="flex flex-row space-x-3">
       <a href="/install" class="btn btn-secondary duration-300 hover:-translate-y-0.5">Install</a>
@@ -29,7 +29,7 @@
       </span>
     </span>
   </div>
-  <div id="get-started" class="w-full flex flex-col space-y-4 items-center bg-[url($lib/media/Banner.png)] bg-center py-28 hover:brightness-105 duration-300">
+  <div id="get-started" class="w-full flex flex-col space-y-4 items-center bg-[url($lib/media/BannerBackground.png)] bg-center py-28 hover:brightness-105 duration-300">
     <span class="flex flex-row space-x-3">
       <a href="/install" class="btn btn-lg btn-secondary duration-300 hover:-translate-y-0.5">Get started</a>
     </span>

@@ -29,7 +29,7 @@
     </div>
     <div class="form-control">
       <label for="tosAccepted" class="label">
-        <span class="label-text">I have read and agree to both the <a class="link" target="_blank" href="https://en.help.roblox.com/hc/en-us/articles/115004647846-Roblox-Terms-of-Use">Roblox</a> and <a class="link" target="_blank" href="/terms">RoRooms</a> Terms of Service</span>
+        <span class="label-text">I have read and agree to both the <a class="link" target="_blank" href="https://en.help.roblox.com/hc/en-us/articles/115004647846-Roblox-Terms-of-Use">Roblox</a> and <a class="link" target="_blank" href="/terms">Rorooms</a> Terms of Service</span>
         <input name="tosAccepted" type="checkbox" class="checkbox checkbox-primary" id="tosAccepted" required>
       </label>
     </div>

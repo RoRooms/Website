@@ -29,7 +29,7 @@
     </div>
     <div class="form-control">
       <label for="tosAccepted" class="label">
-        <span class="label-text">I have read and agree to both the <a class="link" target="_blank" href="https://en.help.roblox.com/hc/en-us/articles/115004647846-Roblox-Terms-of-Use">Roblox</a> and <a class="link" target="_blank" href="/terms">RoRooms</a> Terms of Service</span>
+        <span class="label-text">I have read and agree to both the <a class="link" target="_blank" href="https://en.help.roblox.com/hc/en-us/articles/115004647846-Roblox-Terms-of-Use">Roblox</a> and <a class="link" target="_blank" href="/terms">Rorooms</a> Terms of Service</span>
         <input name="tosAccepted" type="checkbox" class="checkbox checkbox-primary" id="tosAccepted" required>
       </label>
     </div>
@@ -40,10 +40,10 @@
     <h2>Keep in mind</h2>
     <p>Worlds <b>must:</b></p>
     <ul>
-      <li>Utilize the RoRooms framework, with world discovery enabled. 🌐</li>
+      <li>Utilize the Rorooms framework, with world discovery enabled. 🌐</li>
       <li>Not directly <i>or</i> indirectly promote Roblox ToS violation. ⚠️</li>
     </ul>
-    <p>Delisting is subject to RoRooms' discretion. You are always welcome to fork the network.</p>
+    <p>Delisting is subject to Rorooms' discretion. You are always welcome to fork the network.</p>
   </div>
   <div class="divider"></div>
   <a href="/unpublish">I'd like to unpublish my world</a>

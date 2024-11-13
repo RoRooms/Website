@@ -32,7 +32,7 @@
 <li>With third party vendors and other service providers who need access to your information to carry out work on our behalf, such as <strong>Roblox sign-in</strong>;</li>
 <li>If we believe disclosure is reasonably necessary to comply with any applicable law, regulation, legal process or governmental request;</li>
 <li>To enforce applicable user agreements or policies, including our Terms of Service <strong><a href="https://rorooms.com/terms">rorooms.com/terms</a></strong>; and to protect us, our users or the public from harm or illegal activities;</li>
-<li>In connection with any merger, sale of <strong>RoRooms</strong> assets, financing or acquisition of all or a portion of our business to another company; and</li>
+<li>In connection with any merger, sale of <strong>Rorooms</strong> assets, financing or acquisition of all or a portion of our business to another company; and</li>
 <li>If we notify you through our services (or in our privacy policy) that the information you provide will be shared in a particular manner and you provide such information.</li>
 </ul>
 <p>We may also share aggregated or anonymized information that does not directly identify you.</p>

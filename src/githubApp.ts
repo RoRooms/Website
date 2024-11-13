@@ -9,7 +9,7 @@ type WorldFileContent = {
 	forceDelisted?: boolean;
 };
 
-const OWNER = 'RoRooms';
+const OWNER = 'Rorooms';
 const REPO = 'Worlds';
 
 const app = new App({
